@@ -83,3 +83,5 @@ Termina los componentes en `frontend/src/` para pasar `frontend/src/__tests__/Pr
 - **Todo OK** si ambos quedan en verde.
 
 **Documentos útiles:** consulta la [RÚBRICA](./RUBRICA.md) y la plantilla de calificación en `plantillas/score.json`.
+
+
