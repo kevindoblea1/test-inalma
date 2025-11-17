@@ -8,6 +8,7 @@ class Product(models.Model):
     tags = models.JSONField(default=list, blank=True)
 
     class Meta:
+        ordering = ["id"]
         constraints = [
             models.UniqueConstraint(
                 Lower("name"), name="uniq_product_name_ci"
