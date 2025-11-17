@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import SearchBar from './components/SearchBar.jsx'
 import ProductList from './components/ProductList.jsx'
+import useDebounce from './hooks/useDebounce.js'
 
 const API = import.meta.env.VITE_API_URL || 'http://localhost:8000/api'
 
@@ -10,10 +11,11 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [query, setQuery] = useState('')
+  const debouncedQuery = useDebounce(query, 300)
 
   useEffect(() => {
     let canceled = false
-    async function load() {
+    async function load(query = '') {
       setLoading(true); setError(null)
       try {
         const url = new URL(`${API}/products/`)
@@ -28,9 +30,9 @@ export default function App() {
         if (!canceled) setLoading(false)
       }
     }
-    load()
+    load(debouncedQuery)
     return () => { canceled = true }
-  }, [query])
+  }, [debouncedQuery])
 
   return (
     <div style={{maxWidth: 840, margin: '32px auto', padding: '0 16px', fontFamily: 'system-ui, sans-serif'}}>
